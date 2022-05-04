@@ -1,0 +1,13 @@
+version: "3"
+services:
+  db:
+    image: "postgres"
+    container_name: "postgres-vetprospect"
+    environment:
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-vetprospect:/var/lib/postgresql/data
+volumes:
+  postgres-vetprospect:
