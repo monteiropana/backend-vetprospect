@@ -1,15 +1,7 @@
 package com.unifil.vetprospect;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
-
-import com.unifil.vetprospect.models.Veterinario;
-import com.unifil.vetprospect.repository.VeterinarioRepository;
 
 @SpringBootApplication
 public class VetprospectApplication {

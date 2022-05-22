@@ -6,5 +6,7 @@ import com.unifil.vetprospect.models.Veterinario;
 
 public interface VeterinarioService {
 	List<Veterinario> getVeterinarios();
-	String adicionarVeterinario(Veterinario veterinario);
+	Veterinario getVeterinarioById(Long id);
+	Veterinario adicionarVeterinario(Veterinario veterinario);
+	Veterinario alterarVeterinario(Veterinario veterinario);
 }
