@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.unifil.vetprospect.models.Veterinario;
+import com.unifil.vetprospect.models.response.Response;
 import com.unifil.vetprospect.service.VeterinarioService;
 
 @RestController
@@ -35,18 +36,18 @@ public class VeterinarioController {
 	}
 	
 	@PostMapping("/veterinario")
-	public ResponseEntity<String> salvarVeterinario(@RequestBody Veterinario veterinario) {
+	public ResponseEntity<Response> salvarVeterinario(@RequestBody Veterinario veterinario) {
 		veterinario = veterinarioService.adicionarVeterinario(veterinario);
 		if (veterinario.getId() != null) {
-			return new ResponseEntity<>("Veterinario cadastrado com sucesso!", HttpStatus.OK);
+			return new ResponseEntity<>(new Response().setupMensagem("Veterinario cadastrado com sucesso!"), HttpStatus.OK);
 		} else {
-			return new ResponseEntity<>("Erro ao cadastrar veterinário", HttpStatus.OK);
+			return new ResponseEntity<>(new Response().setupMensagem("Erro ao cadastrar veterinário"), HttpStatus.OK);
 		}
 	}
 	
 	@PatchMapping("/veterinario")
-	public ResponseEntity<String> alterarVeterinario(@RequestBody Veterinario veterinario) {
+	public ResponseEntity<Response> alterarVeterinario(@RequestBody Veterinario veterinario) {
 		veterinario = veterinarioService.alterarVeterinario(veterinario);
-		return new ResponseEntity<>("Veterinario alterado com sucesso!", HttpStatus.OK);
+		return new ResponseEntity<>(new Response().setupMensagem("Veterinario alterado com sucesso!"), HttpStatus.OK);
 	}
 }
