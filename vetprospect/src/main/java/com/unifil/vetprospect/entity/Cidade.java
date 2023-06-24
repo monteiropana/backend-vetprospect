@@ -1,31 +1,38 @@
-package com.unifil.vetprospect.models;
+package com.unifil.vetprospect.entity;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.unifil.vetprospect.models.request.CidadeRequestDTO;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 @Entity
 @Table(name = "cidade")
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Cidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonProperty("id")
 	@Id
+	@JsonProperty("id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
@@ -37,6 +44,11 @@ public class Cidade implements Serializable {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_estado", foreignKey = @ForeignKey(name = "fk_estado"))
 	private Estado estado;
+
+	public Cidade(CidadeRequestDTO cidadeDto) {
+		this.nome = cidadeDto.getNome();
+		this.estado = Estado.builder().uf(cidadeDto.getUf()).build();
+	}
 
 	public Integer getId() {
 		return id;

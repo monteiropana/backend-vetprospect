@@ -6,6 +6,9 @@ public class Response {
 	
 	@JsonProperty("mensagem")
 	private String mensagem;
+	
+	@JsonProperty("status_code")
+	private int statusCode;
 
 	public String getMensagem() {
 		return mensagem;
@@ -15,8 +18,17 @@ public class Response {
 		this.mensagem = mensagem;
 	}
 	
-	public Response setupMensagem(String mensagem) {
+	public int getStatusCode() {
+		return statusCode;
+	}
+	
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
+	}
+	
+	public Response setup(String mensagem, int statusCode) {
 		this.mensagem = mensagem;
+		this.statusCode = statusCode;
 		return this;
 	}
 }

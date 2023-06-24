@@ -1,47 +1,39 @@
-package com.unifil.vetprospect.models;
+package com.unifil.vetprospect.entity;
 
 import java.io.Serializable;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @JsonAutoDetect(fieldVisibility = Visibility.ANY)
 @Entity
 @Table(name = "estado")
 @EqualsAndHashCode(of = {"uf"})
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Estado implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@JsonProperty("uf")
 	@Id
-	private String uf;
+	@JsonProperty("uf")
+	@Getter @Setter private String uf;
 	
 	@JsonProperty("nome")
 	@Column(length = 100, nullable = false)
-	private String nome;
+	@Getter @Setter private String nome;
 
-	public String getUf() {
-		return uf;
-	}
-
-	public void setUf(String uf) {
-		this.uf = uf;
-	}
-
-	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 }
