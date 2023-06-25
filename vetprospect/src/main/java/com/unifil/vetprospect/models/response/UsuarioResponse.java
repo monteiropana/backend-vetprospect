@@ -1,5 +1,7 @@
 package com.unifil.vetprospect.models.response;
 
+import java.util.UUID;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -13,9 +15,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class UsuarioResponse extends Response {
 	
+	private UUID id;
 	private String nome;
-	@JsonProperty("cpf_cnpj")
-	private String cpfCnpj;
+	private String email;
 	private String crmv;
 	private String telefone;
 	@JsonProperty("created_at")

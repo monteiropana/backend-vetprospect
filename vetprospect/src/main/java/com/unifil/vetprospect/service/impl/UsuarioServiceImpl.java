@@ -27,9 +27,10 @@ public class UsuarioServiceImpl implements UsuarioService {
 		List<UsuarioResponse> veterinarios = clientes.stream()
 				.map(vet -> UsuarioResponse
 								.builder()
+								.id(vet.getId())
 								.nome(vet.getNome())
+								.email(vet.getUsername())
 								.crmv(vet.getCrmv())
-								.cpfCnpj(vet.getCpfCnpj())
 								.createdAt(vet.getCreatedAt().format(CUSTOM_FORMATTER))
 								.telefone(vet.getTelefone())
 								.especialidade(vet.getEspecialidades())
