@@ -6,6 +6,7 @@ import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -35,10 +36,15 @@ public class SecurityConfiguration {
 			.authenticated()
 			.and()
 			.sessionManagement()
-			.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
 			.and()
 			.authenticationProvider(authenticationProvider)
-			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+			.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+			.logout()
+			.logoutUrl("/api/v1/auth/logout")
+			.logoutSuccessHandler((request, response, authentication) -> {
+				SecurityContextHolder.clearContext();
+			});
 		
 //		http.csrf().ignoringRequestMatchers("/h2-console/**");
 //		
@@ -53,6 +59,7 @@ public class SecurityConfiguration {
 	       @Override
 	       public void addCorsMappings(CorsRegistry registry) {
 	           registry.addMapping("/**")
+	           	 .allowCredentials(true)
 	             .allowedOrigins("http://localhost:4200", "http://localhost:8100", "http://app-mor.s3-website-sa-east-1.amazonaws.com")
 	             .allowedMethods("*")
 	             .maxAge(3600);

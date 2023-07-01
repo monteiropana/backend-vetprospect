@@ -55,7 +55,7 @@ public class VetprospectApplication {
 					.email("vet1@email.com")
 					.senha(encoder.encode("123456"))
 					.especialidades("Animais de Grande Porte")
-					.endereco(Endereco.builder().logradouro("Londrina").bairro("Gleba").cep("86061312").numero("123").cidade(Cidade.builder().id(3).build()).build())
+					.endereco(Endereco.builder().logradouro("Avenida das Flores").bairro("Gleba").cep("86061312").numero("123").cidade(Cidade.builder().id(3).build()).build())
 					.observacoes("Atendimento a domicilio gratis")
 					.role(Role.VET)
 					.build());

@@ -16,16 +16,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ClienteRequestDTO {
+public class PartialClienteRequestDTO {
 	
 	private UUID id;
 	private String nome;
-	private String cpfCnpj;
-	private String senha;
-	private String email;
-	private String crmv;
 	private String observacoes;
 	private String especialidades;
+	private String telefone;
 	private EnderecoRequestDTO endereco;
 	
 }

@@ -25,4 +25,5 @@ public class UsuarioResponse extends Response {
 	private String especialidade;
 	private String observacoes;
 	private String endereco;
+	private EnderecoEditResponse enderecoEdit;
 }

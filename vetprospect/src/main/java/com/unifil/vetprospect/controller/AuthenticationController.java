@@ -1,6 +1,8 @@
 package com.unifil.vetprospect.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,8 +18,9 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
-public class AuthenticationController {
+public class AuthenticationController extends BaseController {
 	
+	@Autowired
 	private final AuthenticationService authService;
 
 	@PostMapping("/register")
@@ -28,5 +31,11 @@ public class AuthenticationController {
 	@PostMapping("/login")
 	public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest authRequest) {
 		return ResponseEntity.ok(authService.login(authRequest));
+	}
+	
+	@GetMapping("/logout")
+	public ResponseEntity<String> logout() {
+		session.invalidate();
+		return ResponseEntity.ok("logout realizado com sucesso");
 	}
 }

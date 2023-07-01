@@ -1,5 +1,6 @@
 package com.unifil.vetprospect.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,12 +26,20 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthenticationService {
 	
+	@Autowired
+	private final HttpSession httpSession;
+	
+	@Autowired
 	private final ClienteRepository clienteRepository;
 	private final PasswordEncoder encoder;
+	
+	@Autowired
 	private final JwtService jwtService;
+	@Autowired
 	private final AuthenticationManager authManager;
-	private final HttpSession httpSession;
+	@Autowired
 	private final CidadeRepository cidadeRepository;
+	@Autowired
 	private final EnderecoRepository enderecoRepository;
 	
 	public AuthenticationResponse register(ClienteRequestDTO clienteRequest) throws Exception {
@@ -80,11 +89,13 @@ public class AuthenticationService {
 	
 	public AuthenticationResponse generateToken(Cliente cliente) {
 		var token = jwtService.generateToken(cliente);
-		httpSession.setAttribute("cliente", cliente);
 		return AuthenticationResponse.builder()
 				.token(token)
+				.id(cliente.getId())
 				.nome(cliente.getNome())
 				.role(cliente.getRole().toString())
 				.build();
 	}
+	
+	
 }

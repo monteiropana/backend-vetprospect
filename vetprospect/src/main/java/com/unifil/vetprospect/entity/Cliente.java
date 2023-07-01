@@ -71,7 +71,7 @@ public class Cliente implements UserDetails, Serializable {
 	@Column(nullable = true)
 	@Getter @Setter private LocalDateTime createdAt;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "_endereco", foreignKey = @ForeignKey(name = "fk_endereco"))
 	@Getter @Setter private Endereco endereco;
 	
