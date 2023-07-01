@@ -60,7 +60,7 @@ public class SecurityConfiguration {
 	       public void addCorsMappings(CorsRegistry registry) {
 	           registry.addMapping("/**")
 	           	 .allowCredentials(true)
-	             .allowedOrigins("http://localhost:4200", "http://localhost:8100", "http://app-mor.s3-website-sa-east-1.amazonaws.com")
+	             .allowedOrigins("http://localhost:4200", "http://localhost:8100", "http://app-mor.s3-website-sa-east-1.amazonaws.com", "http://vet-prospect.s3-website-sa-east-1.amazonaws.com/")
 	             .allowedMethods("*")
 	             .maxAge(3600);
 	       }
